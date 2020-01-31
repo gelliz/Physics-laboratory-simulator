@@ -1,0 +1,66 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Follower : MonoBehaviour {
+
+    new Renderer renderer;
+
+    private void Start()
+    {
+        renderer = GetComponent<Renderer>();
+        renderer.enabled = false;
+    }
+
+    void OnEnable()//при включении/содании объекта
+    {
+        EventManager.Switch += SwithWork;//подписались на событие 
+        EventManager.SwitchM += SwithMWork;
+        //EventManager.Door += SwithDoor;
+    }
+
+    private void OnDisable()//при выключении/удалении объекта
+    {
+        EventManager.Switch -= SwithWork;//отписались от события
+        EventManager.SwitchM -= SwithMWork;
+        //EventManager.Door -= SwithDoor;
+    }
+
+    void SwithWork(bool work)//при возникновении события
+    {
+        if(work)
+        {
+            renderer.enabled = true;
+        }
+        else
+        {
+            renderer.enabled = false;
+        }
+    }
+
+    void SwithMWork(bool work)//при возникновении события
+    {
+        if (work)
+        {
+            renderer.enabled = true;
+        }
+        else
+        {
+            renderer.enabled = false;
+        }
+    }
+
+    //void SwithDoor(bool work)//при возникновении события
+    //{
+    //    if (work)
+    //    {
+    //        renderer.enabled = true;
+    //    }
+    //    else
+    //    {
+    //        renderer.enabled = false;
+    //    }
+    //}
+
+
+}
